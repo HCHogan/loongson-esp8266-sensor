@@ -39,17 +39,33 @@ void loop() {
     int index_temperature = request.indexOf("temperature=");
     int index_humidity = request.indexOf("&humidity=");
     int index_ID = request.indexOf("&ID=");
+    int index_co2 = request.indexOf("&co2=");
+    int index_tvoc = request.indexOf("&tvoc=");
+    int index_lux = request.indexOf("&lux=");
     if (index_temperature != -1 && index_humidity != -1) {
       String temperature_str = request.substring(index_temperature + 12, index_humidity);
-      String humidity_str = request.substring(index_humidity + 10, index_ID);
+      String humidity_str = request.substring(index_humidity + 10, index_co2);
+      
+      String co2_str = request.substring(index_co2 + 5, index_tvoc);
+      String tvoc_str = request.substring(index_tvoc + 6, index_lux);
+      String lux_str = request.substring(index_lux + 5, index_ID);
       String ID_str = request.substring(index_ID + 4);
       float temperature = temperature_str.toFloat();
       float humidity = humidity_str.toFloat();
       int id = ID_str.toInt();
+      int lux = lux_str.toInt();
+      int tvoc = tvoc_str.toInt();
+      int co2 = co2_str.toInt();
       Serial.print("!");
       Serial.print(temperature);
       Serial.print(" ");
       Serial.print(humidity);
+      Serial.print(" ");
+      Serial.print(co2);
+      Serial.print(" ");
+      Serial.print(tvoc);
+      Serial.print(" ");
+      Serial.print(lux);
       
       Serial.print(" ");
       Serial.print(id);

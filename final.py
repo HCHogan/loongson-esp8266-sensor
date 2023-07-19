@@ -111,26 +111,39 @@ class CustomerThing(object):
             s = com.readline().decode("utf-8").strip()
             if s != "":
                 if s[0] == "!":
-                    temp = float(s[1:6])
-                    humi = float(s[7:12])
-                    m_id = int(s[13:14])
+                    s = s[1::].split()
+                    temp = float(s[0])
+                    humi = float(s[1])
+                    co2 = int(s[2])
+                    tvoc = int(s[3])
+                    lux = int(s[4])
+                    m_id = int(s[5])
                     prop_data = {}
                     if m_id == 1:
                         prop_data = {
                             "CurrentHumidity1": humi,
-                            "CurrentTemperature1": temp
+                            "CurrentTemperature1": temp,
+                            "Lux1":lux,
+                            "tvoc1":tvoc,
+                            "co21":co2,
                         }
 
                     if m_id == 0:
                         prop_data = {
                             "CurrentHumidity": humi,
-                            "CurrentTemperature": temp
+                            "CurrentTemperature": temp,
+                            "Lux":lux,
+                            "tvoc":tvoc,
+                            "co2":co2,
                         }
 
                     if m_id == 2:
                         prop_data = {
                             "CurrentHumidity2": humi,
-                            "CurrentTemperature2": temp
+                            "CurrentTemperature2": temp,
+                            "Lux2":lux,
+                            "tvoc2":tvoc,
+                            "co22":co2,
                         }
 
                     self.__linkkit.thing_post_property(prop_data)
